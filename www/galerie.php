@@ -3,8 +3,107 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Galerie projektů</title>
-  <link rel="stylesheet" href="style/galerie.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie - JL střechy</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a0f0c 0%, #2d1810 50%, #1a0f0c 100%);
+      min-height: 100vh;
+      color: #fff;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .container h1 {
+      color: #f0b000;
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .gallery-item {
+      background: rgba(60, 30, 10, 0.5);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(240, 176, 0, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    }
+    
+    .gallery-item:hover {
+      background: rgba(60, 30, 10, 0.8);
+      border-color: rgba(240, 176, 0, 0.6);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(240, 176, 0, 0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-item h3 {
+      padding: 1.5rem 1rem;
+      color: #f0b000;
+      font-size: 1.1rem;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+    }
+    
+    .back-link {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .back-link a {
+      color: #f0b000;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      background: rgba(240, 176, 0, 0.1);
+      border: 1px solid rgba(240, 176, 0, 0.3);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+    
+    .back-link a:hover {
+      background: rgba(240, 176, 0, 0.2);
+      border-color: rgba(240, 176, 0, 0.8);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -66,6 +165,9 @@
         <h3>10-Dřevostavba chata k celoročnímu bydlení</h3>
       </a>
       
+    </div>
+    <div class="back-link">
+      <a href="../index.html">← Zpět na domovskou stránku</a>
     </div>
   </div>
 </body>

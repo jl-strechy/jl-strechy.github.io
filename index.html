@@ -9,10 +9,15 @@
   <meta property="og:image" content="images/preview.jpg">
   <meta property="og:description" content="Kvalitní řemeslo bez železa. Vizuálně i funkčně precizní střechy.">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Context7 Once UI Framework -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@context7/once-ui/dist/index.min.css">
   <link rel="stylesheet" href="style/css.css">
 
 </head>
 <body>
+  <!-- Animace padajícího listí - Leaves WeatherFX -->
+  <div id="leaves-container" class="leaves-weatherfx"></div>
+  
   <div class="container">
     <!-- Úvodní kotva -->
     <div id="Úvod"></div>
@@ -93,10 +98,26 @@
     <section class="services" id="services" data-aos="fade-up">
       <h2>Co děláme</h2>
       <div class="service-grid">
-        <div class="service-item" data-aos="zoom-in"><i>🏠</i><strong>Střechy</strong></div>
-        <div class="service-item" data-aos="zoom-in"><i>🪚</i><strong>Tesařství</strong></div>
-        <div class="service-item" data-aos="zoom-in"><i>🔧</i><strong>Klempířství</strong></div>
-        <div class="service-item" data-aos="zoom-in"><i>🏘️</i><strong>Prodej výrobků</strong></div>
+        <div class="service-item card" data-aos="zoom-in">
+          <i class="icon">🏠</i>
+          <strong>Střechy</strong>
+          <p>Kvalitní střešní pokrývání s dřevem a tradičními technikami.</p>
+        </div>
+        <div class="service-item card" data-aos="zoom-in">
+          <i class="icon">🪚</i>
+          <strong>Tesařství</strong>
+          <p>Profesionální tesařské práce na míru vašim potřebám.</p>
+        </div>
+        <div class="service-item card" data-aos="zoom-in">
+          <i class="icon">🔧</i>
+          <strong>Klempířství</strong>
+          <p>Klempířské služby s kvalitními materiály.</p>
+        </div>
+        <div class="service-item card" data-aos="zoom-in">
+          <i class="icon">🏘️</i>
+          <strong>Prodej výrobků</strong>
+          <p>Výrobky z našeho e-shopu přímo k vám domů.</p>
+        </div>
       </div>
     </section>
 
@@ -118,15 +139,15 @@
     </section>
 
     <section class="contact-form" id="contact" data-aos="fade-up" class="contact-wrapper">
-      <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-radius: 12px; padding: 2rem; max-width: 600px; margin: 2rem auto; color: #fff;">
+      <div style="background: rgba(60, 30, 10, 0.4); backdrop-filter: blur(20px); border: 1px solid rgba(240, 176, 0, 0.2); border-radius: 16px; padding: 2rem; max-width: 600px; margin: 2rem auto; color: #fff; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1);">
         <h2>Kontaktujte nás</h2>
         <form action="mailto:info@jlstrechy.cz" method="POST" enctype="text/plain">
           <label for="name">Jméno a příjmení</label><br>
-          <input type="text" id="name" name="name" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;"><br>
+          <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; margin-bottom: 1rem;"><br>
           <label for="email">E-mail</label><br>
-          <input type="email" id="email" name="email" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;"><br>
+          <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; margin-bottom: 1rem;"><br>
           <label for="message">Zpráva</label><br>
-          <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.5rem;"></textarea><br><br>
+          <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem;"></textarea><br><br>
           <button type="submit" class="btn-yellow">Odeslat</button>
         </form>
       </div>
@@ -160,6 +181,41 @@ document.addEventListener("DOMContentLoaded", function() {
   toggle.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
   });
+  
+  // Leaves WeatherFX Animace
+  const leavesContainer = document.getElementById("leaves-container");
+  const leafColors = ['autumn', 'orange', 'gold', 'brown', 'dark'];
+  const leafClasses = ['leaf-1', 'leaf-2', 'leaf-3', 'leaf-4', 'leaf-5', 'leaf-6', 'leaf-7', 'leaf-8'];
+  
+  function createLeaf() {
+    const leaf = document.createElement("div");
+    leaf.classList.add("leaf");
+    leaf.classList.add(leafClasses[Math.floor(Math.random() * leafClasses.length)]);
+    leaf.classList.add(leafColors[Math.floor(Math.random() * leafColors.length)]);
+    
+    // Náhodná pozice X
+    const randomX = Math.random() * window.innerWidth;
+    leaf.style.left = randomX + "px";
+    
+    // Náhodná rotace
+    const randomRotate = Math.random() * 360;
+    leaf.style.transform = `rotateZ(${randomRotate}deg)`;
+    
+    leavesContainer.appendChild(leaf);
+    
+    // Odstranění listu po skončení animace
+    setTimeout(() => {
+      leaf.remove();
+    }, 15000);
+  }
+  
+  // Vytváření listí každých 800ms
+  setInterval(createLeaf, 800);
+  
+  // Počáteční listí
+  for (let i = 0; i < 5; i++) {
+    setTimeout(createLeaf, i * 200);
+  }
 });
 </script>
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
