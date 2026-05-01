@@ -1,25 +1,36 @@
 <?php
 require 'db.php';
+session_start();
+$csrf_token = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $csrf_token;
+
 $success = '';
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $password_confirm = $_POST['password_confirm'] ?? '';
-    
-    if ($password !== $password_confirm) {
-        $error = "Hesla se neshodují.";
-    } elseif (strlen($password) < 6) {
-        $error = "Heslo musí mít alespoň 6 znaků.";
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $error = "Neplatný token.";
     } else {
-        $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        try {
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-            $stmt->execute([$username, $email, $password_hash]);
-            $success = "Registrace úspěšná. <a href='login.php' style='color: #f0b000;'>Přihlásit se zde</a>";
-        } catch (Exception $e) {
-            $error = "Uživatelské jméno nebo e-mail již existuje.";
+        $username = $_POST['username'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $password_confirm = $_POST['password_confirm'] ?? '';
+        
+        if ($password !== $password_confirm) {
+            $error = "Hesla se neshodují.";
+        } elseif (strlen($password) < 6) {
+            $error = "Heslo musí mít alespoň 6 znaků.";
+        } else {
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            try {
+                $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                $stmt->execute([$username, $email, $password_hash]);
+                $success = "Registrace úspěšná. <a href='login.php' style='color: #f0b000;'>Přihlásit se zde</a>";
+                // Regenerate token after successful registration
+                $csrf_token = bin2hex(random_bytes(32));
+                $_SESSION['csrf_token'] = $csrf_token;
+            } catch (Exception $e) {
+                $error = "Uživatelské jméno nebo e-mail již existuje.";
+            }
         }
     }
 }
@@ -156,6 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="error"><?php echo $error; ?></div>
     <?php endif; ?>
     <form method="POST">
+      <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
       <div class="form-group">
         <label for="username">Uživatelské jméno</label>
         <input type="text" name="username" id="username" placeholder="Vaše jméno" required>

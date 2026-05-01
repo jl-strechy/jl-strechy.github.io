@@ -1,18 +1,25 @@
 <?php
 require 'db.php';
 session_start();
+$csrf_token = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $csrf_token;
+
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$_POST['username']]);
-    $user = $stmt->fetch();
-    if ($user && password_verify($_POST['password'], $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role'] = $user['role'];
-        header('Location: dashboard.php');
-        exit();
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $error = "Neplatný token.";
     } else {
-        $error = "Neplatné přihlašovací údaje.";
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$_POST['username']]);
+        $user = $stmt->fetch();
+        if ($user && password_verify($_POST['password'], $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['role'] = $user['role'];
+            header('Location: dashboard.php');
+            exit();
+        } else {
+            $error = "Neplatné přihlašovací údaje.";
+        }
     }
 }
 ?>
@@ -134,6 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="error"><?php echo $error; ?></div>
     <?php endif; ?>
     <form method="POST">
+      <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
       <div class="form-group">
         <label for="username">Uživatelské jméno</label>
         <input type="text" name="username" id="username" placeholder="Vaše jméno" required>

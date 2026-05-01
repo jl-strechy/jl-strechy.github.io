@@ -1,29 +1,33 @@
 <?php
-$host = 'localhost';
-$db   = 'jlstrechy';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+require 'db.php';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
+// Sanitize inputs
+$name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+
+if (!$name || !$email || !$message) {
+    http_response_code(400);
+    echo "Neplatné údaje.";
+    exit;
+}
 
 try {
-    $pdo = new PDO($dsn, $user, $pass, $options);
-
     $stmt = $pdo->prepare("INSERT INTO formular (jmeno, email, zprava) VALUES (?, ?, ?)");
-    $stmt->execute([
-        $_POST['name'],
-        $_POST['email'],
-        $_POST['message']
-    ]);
+    $stmt->execute([$name, $email, $message]);
+
+    // Send email notification
+    $to = 'info@jlstrechy.cz';
+    $subject = 'Nová kontaktní zpráva';
+    $body = "Jméno: $name\nE-mail: $email\nZpráva: $message";
+    $headers = "From: $email";
+
+    mail($to, $subject, $body, $headers);
 
     echo "Děkujeme za zprávu!";
 } catch (PDOException $e) {
-    echo "Chyba databáze: " . $e->getMessage();
+    error_log("Database error: " . $e->getMessage());
+    http_response_code(500);
+    echo "Chyba serveru. Zkuste to později.";
 }
 ?>

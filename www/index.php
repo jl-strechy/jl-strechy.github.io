@@ -5,9 +5,18 @@
   <title>JL střechy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="JL střechy – Střešní práce s citem a dřevem. Tesařství, klempířství, prodej výrobků.">
+  <meta name="keywords" content="střechy, tesařství, klempířství, dřevo, řemeslo, Česká republika">
+  <meta name="author" content="JL Střechy">
+  <meta name="robots" content="index, follow">
   <meta property="og:title" content="JL střechy">
   <meta property="og:image" content="images/preview.jpg">
   <meta property="og:description" content="Kvalitní řemeslo bez železa. Vizuálně i funkčně precizní střechy.">
+  <meta property="og:url" content="https://jlstrechy.cz">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JL střechy">
+  <meta name="twitter:description" content="Střechy stavíme s citem a dřevem.">
+  <meta name="twitter:image" content="images/preview.jpg">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="style/css.css">
 
@@ -104,13 +113,13 @@
       <h2>Realizace</h2>
       <div class="gallery-grid">
         <div class="gallery-item" data-aos="zoom-in">
-          <img src="images/05_Garáž dřevostavba/Obrázek WhatsApp.jpg" alt="Krov">
+          <img src="images/05_Garáž dřevostavba/Obrázek WhatsApp.jpg" alt="Krov" loading="lazy">
         </div>
         <div class="gallery-item" data-aos="zoom-in">
-          <img src="images/02-BALKON/IMG-20250720-WA0022.jpg" alt="Bungalov">
+          <img src="images/02-BALKON/IMG-20250720-WA0022.jpg" alt="Bungalov" loading="lazy">
         </div>
         <div class="gallery-item" data-aos="zoom-in">
-          <img src="images/01.jpg" alt="Dům">
+          <img src="images/01.jpg" alt="Dům" loading="lazy">
         </div>
       </div>
       <br />
@@ -120,7 +129,8 @@
     <section class="contact-form" id="contact" data-aos="fade-up" class="contact-wrapper">
       <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); border-radius: 12px; padding: 2rem; max-width: 600px; margin: 2rem auto; color: #fff;">
         <h2>Kontaktujte nás</h2>
-        <form action="mailto:info@jlstrechy.cz" method="POST" enctype="text/plain">
+        <form action="form-handler.php" method="POST">
+          <input type="hidden" name="csrf_token" value="<?php echo bin2hex(random_bytes(32)); ?>">
           <label for="name">Jméno a příjmení</label><br>
           <input type="text" id="name" name="name" required style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;"><br>
           <label for="email">E-mail</label><br>
@@ -162,13 +172,20 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 </script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({
       duration: 1000,
       once: true,
       easing: 'ease-in-out'
     });
+  </script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
   </script>
 </body>
 </html>
