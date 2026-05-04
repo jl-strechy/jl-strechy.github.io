@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JL Střechy – Tesařství a klempířství</title>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --page: #000000;
+      --surface: #fff7e8;
+      --surface-2: #f4e4cc;
+      --ink: #1e1712;
+      --muted: #6e5948;
+      --brown: #1e120d;
+      --brown-2: #2d1f1a;
+      --gold: #f0b000;
+      --gold-2: #ffd766;
+      --glass: rgba(255, 255, 255, 0.22);
+      --glass-strong: rgba(255, 255, 255, 0.36);
+      --glass-border: rgba(255, 255, 255, 0.38);
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius-xl: 28px;
+      --radius-l: 20px;
+      --radius-m: 14px;
+    }
+
+    body.dark {
+      --surface: #121212;
+      --surface-2: #1b1b1b;
+      --ink: #f5f5f5;
+      --muted: #c8bcae;
+      --brown: #090909;
+      --brown-2: #16110f;
+      --glass: rgba(255,255,255,.10);
+      --glass-strong: rgba(255,255,255,.16);
+      --glass-border: rgba(255,255,255,.20);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Aptos, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(240,176,0,.22), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(255,255,255,.10), transparent 28rem),
+        var(--page);
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      transition: background-color .35s ease, color .35s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: .8rem 1.25rem;
+      margin: .75rem;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-l);
+      background: var(--glass);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      box-shadow: 0 10px 40px rgba(0,0,0,.14);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      min-width: max-content;
+      font-weight: 900;
+      letter-spacing: .12rem;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold), #fff2b8);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 25px rgba(240,176,0,.35);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .menu a, .toggle-theme {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .9rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 999px;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: .55rem .85rem;
+      transition: transform .25s ease, background .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+    }
+
+    .menu a:hover, .toggle-theme:hover {
+      background: var(--glass-strong);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.20), 0 10px 25px rgba(0,0,0,.18);
+      transform: translateY(-2px);
+    }
+
+    .menu-group {
+      position: relative;
+    }
+
+    .submenu {
+      position: absolute;
+      top: calc(100% + .5rem);
+      right: 0;
+      min-width: 210px;
+      display: none;
+      flex-direction: column;
+      gap: .35rem;
+      padding: .6rem;
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      background: rgba(20, 14, 10, .74);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-group:hover .submenu { display: flex; }
+    .submenu a { color: #fff; justify-content: flex-start; border-radius: 12px; }
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1fr 1.02fr;
+      align-items: stretch;
+      position: relative;
+    }
+
+    .intro-text {
+      padding: 5rem 2.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      gap: .45rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: .5rem .75rem;
+      border-radius: 999px;
+      background: rgba(240,176,0,.14);
+      color: #6a4900;
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .08rem;
+      text-transform: uppercase;
+    }
+
+    .intro-text h1 {
+      margin: 0 0 1rem;
+      font-family: "Arial Black", Impact, Aptos, sans-serif;
+      font-size: clamp(2.6rem, 6vw, 5.4rem);
+      line-height: .95;
+      letter-spacing: .22rem;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .intro-text p {
+      max-width: 34rem;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0 0 1.7rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .badge {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      width: fit-content;
+      padding: .62rem 1rem;
+      border-radius: 999px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .035rem;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(240,176,0,.34);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      box-shadow: 0 10px 28px rgba(0,0,0,.13), inset 0 1px 0 rgba(255,255,255,.35);
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .badge::before {
+      content: "";
+      position: absolute;
+      inset: -40% auto -40% -70%;
+      width: 60%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      transform: rotate(18deg);
+      animation: badgeShine 4.5s ease-in-out infinite;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.34);
+      box-shadow: 0 0 0 3px rgba(240,176,0,.16), 0 16px 36px rgba(0,0,0,.20);
+    }
+
+    .badge-arrow {
+      opacity: .75;
+      transform: translateX(0);
+      transition: transform .25s ease, opacity .25s ease;
+    }
+
+    .badge:hover .badge-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    @keyframes badgeShine {
+      0%, 55% { left: -70%; }
+      100% { left: 130%; }
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: .9rem 1.25rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #1d1300;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      box-shadow: 0 14px 30px rgba(240,176,0,.34);
+    }
+
+    .btn-glass {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--ink);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+
+    .intro-img {
+      position: relative;
+      min-height: 90vh;
+      background: url('https://i.ibb.co/PGywwLpD/worker-jpg.png') no-repeat center top/cover;
+    }
+
+    .intro-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--surface) 0%, rgba(255,247,232,.35) 35%, rgba(0,0,0,.08) 100%);
+    }
+
+    section {
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      margin: 0 0 1.5rem;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: .08rem;
+      text-transform: uppercase;
+    }
+
+    .services {
+      background: linear-gradient(180deg, var(--brown-2), var(--brown));
+      color: #fff;
+    }
+
+    .service-grid, .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .service-item, .gallery-item, .contact-card, .footer-card {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: .7rem;
+      font-size: 8px;
+      line-height: 1.35;
+      background: rgba(255,255,255,.20);
+      border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+    }
+
+    .service-item {
+      position: relative;
+      overflow: hidden;
+      padding: 1.45rem;
+      min-height: 210px;
+      color: #fff;
+      isolation: isolate;
+      border-radius: var(--radius-l);
+      border: 1px solid rgba(255, 205, 105, .38);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.22)),
+        linear-gradient(90deg, #5a3519, #8a5729 18%, #3f2614 36%, #a66a32 52%, #4a2b15 74%, #7a4a24);
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.25),
+        inset 0 -16px 28px rgba(0,0,0,.36),
+        inset 0 0 0 2px rgba(0,0,0,.18);
+      transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+    }
+
+    .service-item:nth-child(1) {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.46)),
+        repeating-linear-gradient(92deg, rgba(255,210,130,.18) 0 2px, transparent 2px 9px),
+        linear-gradient(90deg, #3b2110, #7d4a22 16%, #2b180c 34%, #a8642d 55%, #4a2a14 78%, #8a5528);
+    }
+
+    .service-item:nth-child(2) {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.14), rgba(0,0,0,.40)),
+        repeating-linear-gradient(84deg, rgba(255,230,165,.18) 0 3px, transparent 3px 12px),
+        linear-gradient(90deg, #7b4b22, #c0833e 20%, #5b3419 44%, #d59b50 68%, #74451f);
+    }
+
+    .service-item:nth-child(3) {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.24), rgba(0,0,0,.55)),
+        repeating-linear-gradient(96deg, rgba(255,185,90,.15) 0 2px, transparent 2px 10px),
+        linear-gradient(90deg, #24140b, #5d3519 22%, #2f1b0e 43%, #734421 66%, #1d1109);
+    }
+
+    .service-item:nth-child(4) {
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.17), rgba(0,0,0,.44)),
+        repeating-linear-gradient(88deg, rgba(255,215,120,.16) 0 2px, transparent 2px 11px),
+        linear-gradient(90deg, #533018, #9a602e 18%, #6c3e1d 40%, #b77937 58%, #3c2312 82%, #8d5729);
+    }
+
+    .service-item::before {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      z-index: 0;
+      opacity: .45;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(255,230,170,.22), transparent 22%),
+        radial-gradient(ellipse at 75% 65%, rgba(40,18,5,.35), transparent 30%),
+        repeating-radial-gradient(ellipse at 35% 45%, rgba(255,210,120,.12) 0 2px, rgba(0,0,0,.05) 3px 5px, transparent 6px 14px);
+      filter: blur(5px) contrast(1.18) saturate(1.2);
+      transform: scale(1.08);
+      mask-image: radial-gradient(circle at center, #000 54%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, #000 54%, transparent 100%);
+      transition: opacity .35s ease, filter .35s ease, transform .35s ease;
+    }
+
+    .service-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,.18), transparent 28%, transparent 72%, rgba(255,255,255,.08)),
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.56)),
+        repeating-linear-gradient(0deg, transparent 0 18px, rgba(0,0,0,.10) 18px 19px);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.16),
+        inset 0 0 36px rgba(0,0,0,.42);
+    }
+
+    .service-item > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-item strong {
+      display: inline-block;
+      margin-top: .2rem;
+      font-size: 1.08rem;
+      letter-spacing: .08rem;
+      text-transform: uppercase;
+      text-shadow:
+        0 2px 10px rgba(0,0,0,.72),
+        0 0 14px rgba(255,190,70,.18);
+    }
+
+    .service-item p {
+      color: rgba(255,255,255,.88);
+      text-shadow: 0 1px 7px rgba(0,0,0,.65);
+      line-height: 1.45;
+    }
+
+    .service-item:hover {
+      transform: translateY(-8px) rotateX(1deg);
+      filter: saturate(1.08);
+      box-shadow:
+        0 28px 65px rgba(0,0,0,.42),
+        0 0 0 3px rgba(240,176,0,.12),
+        inset 0 1px 0 rgba(255,255,255,.28),
+        inset 0 -16px 28px rgba(0,0,0,.38);
+    }
+
+    .service-item:hover::before {
+      opacity: .68;
+      filter: blur(2px) contrast(1.32) saturate(1.35);
+      transform: scale(1.14) rotate(.35deg);
+    }
+
+    .service-icon {
+      font-size: 2rem;
+      display: inline-grid;
+      place-items: center;
+      width: 56px;
+      height: 56px;
+      margin-bottom: .8rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(240,176,0,.98), rgba(255,230,150,.98));
+      color: #211600;
+      box-shadow:
+        0 12px 24px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.45),
+        inset 0 -8px 14px rgba(110,65,0,.22);
+    }
+
+    .gallery {
+      background: var(--surface);
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      padding: .55rem;
+      background: rgba(255,255,255,.35);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      border-radius: 16px;
+      transition: transform .45s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.055); }
+
+    .contact {
+      background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    }
+
+    .contact-card {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 1.4rem;
+      background: rgba(255,255,255,.24);
+    }
+
+    .field {
+      display: grid;
+      gap: .35rem;
+      margin-bottom: .85rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid rgba(0,0,0,.10);
+      border-radius: 14px;
+      padding: .85rem;
+      font: inherit;
+      background: rgba(255,255,255,.75);
+      outline: none;
+    }
+
+    input:focus, textarea:focus { box-shadow: 0 0 0 3px rgba(240,176,0,.25); border-color: var(--gold); }
+
+    .footer {
+      position: relative;
+      background:
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.70)),
+        radial-gradient(ellipse at bottom center, rgba(255,180,0,.45) 0%, rgba(255,180,0,.18) 25%, rgba(0,0,0,0) 65%),
+        url('https://i.ibb.co/ks3j2ZNW/wood1-jpg.webp') center/cover;
+      animation: woodMove 18s ease-in-out infinite alternate;
+      overflow: hidden;
+    }
+
+    .footer-mask {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity .28s ease;
+      background:
+        radial-gradient(circle 42px at var(--mx,50%) var(--my,50%), rgba(255,255,255,.80), transparent 72%),
+        radial-gradient(circle 145px at var(--mx,50%) var(--my,50%), rgba(255,205,80,.55), rgba(255,145,0,.20) 45%, transparent 74%),
+        radial-gradient(circle 260px at var(--mx,50%) var(--my,50%), rgba(255,220,130,.22), transparent 72%);
+      mix-blend-mode: screen;
+      filter: saturate(1.25);
+    }
+
+    .footer:hover .footer-mask {
+      opacity: 1;
+    }
+
+    .footer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .28;
+      background:
+        repeating-linear-gradient(110deg, transparent 0 12px, rgba(255,210,120,.10) 13px, transparent 18px),
+        radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,190,0,.28), transparent 45%);
+      mix-blend-mode: overlay;
+    }
+
+    .footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 120px;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(255,200,80,.55), rgba(255,180,0,.25) 40%, transparent 70%);
+      filter: blur(18px);
+      opacity: .9;
+    }
+
+    .footer-card {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: .7rem;
+      font-size: 8px;
+      line-height: 1.35;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: .45rem;
+      flex-wrap: wrap;
+      margin-top: .55rem;
+    }
+
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      object-fit: cover;
+      border-radius: 7px;
+      box-shadow: 0 8px 18px rgba(0,0,0,.25);
+    }
+
+    .dki-logo {
+      max-width: 62px;
+      margin-top: .45rem;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 820px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .menu { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; }
+      .intro-img { min-height: 50vh; }
+      .intro-img::after { background: linear-gradient(180deg, transparent, var(--surface)); }
+    }
+    .fx-panel {
+      position: absolute;
+      top: 50%;
+      right: 2rem;
+      transform: translateY(-50%);
+      width: min(420px, calc(100% - 4rem));
+      min-height: 190px;
+      border: 1px solid rgba(255, 210, 80, .46);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,190,0,.24), transparent 62%),
+        rgba(255,255,255,.14);
+      backdrop-filter: blur(20px) saturate(190%);
+      -webkit-backdrop-filter: blur(20px) saturate(190%);
+      box-shadow:
+        0 0 42px rgba(255,184,0,.28),
+        0 22px 55px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.38);
+      overflow: hidden;
+      z-index: 4;
+      cursor: pointer;
+    }
+
+    .fx-panel canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .matrix-content {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      color: rgba(255,255,255,.92);
+      font-family: "Arial Black", Impact, Aptos, sans-serif;
+      font-size: clamp(1.05rem, 2vw, 1.75rem);
+      line-height: 1.1;
+      letter-spacing: .06rem;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(255,184,0,.85), 0 4px 18px rgba(0,0,0,.55);
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity .35s ease, transform .35s ease, filter .35s ease;
+    }
+
+    .matrix-content span {
+      display: block;
+      margin-top: .45rem;
+      font-family: "Segoe UI", Aptos, Arial, sans-serif;
+      font-size: .55em;
+      letter-spacing: .16rem;
+      font-weight: 800;
+    }
+
+    .fx-panel:hover .matrix-content {
+      opacity: .28;
+      transform: scale(.98);
+      filter: blur(.3px);
+    }
+
+    @media (max-width: 820px) {
+      .fx-panel {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: calc(100% - 2rem);
+        margin: 1rem;
+      }
+    }
+
+
+    /* ==============================
+       SAFE ULTRA++ PATCH
+       Pouze vizuální vrstva – struktura sekcí zůstává zachovaná
+    ============================== */
+
+    @media (hover: hover) and (pointer: fine) {
+      body.ultra-cursor { cursor: none; }
+      .cursor-dot,
+      .cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+      }
+      .cursor-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold-2);
+        box-shadow: 0 0 18px rgba(255,190,0,.9);
+      }
+      .cursor-ring {
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(255,190,0,.65);
+        border-radius: 50%;
+        transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease;
+      }
+      body.cursor-active .cursor-ring {
+        width: 70px;
+        height: 70px;
+        background: rgba(255,190,0,.08);
+        border-color: rgba(255,230,130,.95);
+      }
+    }
+
+    .brand-mark {
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 5px;
+      filter: drop-shadow(0 0 10px rgba(255,180,0,.55));
+    }
+
+    .topbar {
+      background: rgba(255,255,255,.18);
+      box-shadow:
+        0 18px 55px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    body.dark .topbar {
+      background: rgba(18,10,6,.58);
+    }
+
+    .hero {
+      isolation: isolate;
+      perspective: 1200px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.018) 0 1px, transparent 1px 4px),
+        radial-gradient(circle at 20% 20%, rgba(255,200,80,.10), transparent 34%);
+      mix-blend-mode: screen;
+      opacity: .65;
+    }
+
+    .intro-img {
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,.04) 42%, rgba(0,0,0,.16)),
+        radial-gradient(circle at 40% 42%, rgba(255,180,0,.18), transparent 54%),
+        url('https://i.ibb.co/PGywwLpD/worker-jpg.png') no-repeat center top/cover;
+      filter: contrast(1.08) saturate(1.08);
+      will-change: transform;
+    }
+
+    .intro-img::after {
+      background:
+        radial-gradient(circle at 70% 45%, rgba(255,210,90,.12), transparent 38%),
+        linear-gradient(90deg, var(--surface) 0%, rgba(255,247,232,.34) 35%, rgba(0,0,0,.10) 100%);
+      backdrop-filter: blur(.8px);
+    }
+
+    .fx-panel {
+      border-radius: 32px;
+      border-color: rgba(255, 210, 80, .50);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,190,0,.26), transparent 62%),
+        rgba(255,255,255,.12);
+      backdrop-filter: blur(26px) saturate(190%);
+      -webkit-backdrop-filter: blur(26px) saturate(190%);
+      box-shadow:
+        0 0 72px rgba(255,184,0,.34),
+        0 34px 80px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.30);
+    }
+
+    .matrix-content img {
+      max-width: 150px;
+      filter: drop-shadow(0 0 22px rgba(255,180,0,.88));
+    }
+
+    .footer {
+      background:
+        linear-gradient(rgba(0,0,0,.82), rgba(0,0,0,.94)),
+        url('https://i.ibb.co/ks3j2ZNW/wood1-jpg.webp') center/cover;
+      animation: woodMove 18s ease-in-out infinite alternate;
+    }
+
+    .footer-card {
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(16px) saturate(155%);
+      -webkit-backdrop-filter: blur(16px) saturate(155%);
+      border-radius: 18px;
+    }
+
+    @keyframes woodMove {
+      0% { background-position: center top; }
+      100% { background-position: center bottom; }
+    }
+</style>
+</head>
+<body class="ultra-cursor">
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="container">
+    <div class="topbar" data-aos="fade-down">
+      <div class="brand">
+        <div class="brand-mark"><img src="https://i.ibb.co/R4bxcym0/logo.jpg" alt="JL Střechy logo"></div>
+        <div>JL STŘECHY</div>
+      </div>
+      <div class="menu">
+        <div class="menu-group">
+          <a href="#sluzby">Služby</a>
+          <div class="submenu">
+            <a href="#sluzby">Střechy</a>
+            <a href="#sluzby">Tesařství</a>
+            <a href="#sluzby">Klempířství</a>
+          </div>
+        </div>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+        <button class="toggle-theme" onclick="document.body.classList.toggle('dark')">🌗</button>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="intro-text" data-aos="fade-right">
+        <div class="eyebrow">Tesařství · Klempířství · Střechy</div>
+        <h1>POSTAVME TO !</h1>
+        <p>Střechy stavíme s citem a dřevem.<br>Bez zbytečného železa.</p>
+        <div class="badge-row" data-aos="fade-up" data-aos-delay="120">
+          <a class="badge" href="#sluzby">🔨 Poctivé řemeslo <span class="badge-arrow">→</span></a>
+          <a class="badge" href="#galerie">🏗️ Realizace <span class="badge-arrow">→</span></a>
+          <a class="badge" href="#kontakt">📩 Rychlá poptávka <span class="badge-arrow">→</span></a>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#sluzby">Naše služby</a>
+          <a class="btn btn-glass" href="#kontakt">Zadat poptávku</a>
+        </div>
+      </div>
+      <div class="intro-img" data-aos="fade-left">
+        <div class="fx-panel" id="matrixPanel">
+          <canvas id="matrixFxCanvas"></canvas>
+          <div class="matrix-content">JL Střechy, s.r.o.<br><span>Klempířství a tesařství</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section id="sluzby" class="services">
+      <h2 class="section-title" data-aos="fade-up">Co děláme</h2>
+      <div class="service-grid">
+        <div class="service-item" data-aos="zoom-in"><span class="service-icon">🏠</span><br><strong>Střechy</strong><p>Kompletní realizace a opravy střech.</p></div>
+        <div class="service-item" data-aos="zoom-in" data-aos-delay="100"><span class="service-icon">🪚</span><br><strong>Tesařství</strong><p>Krovy, pergoly, konstrukce a dřevěné prvky.</p></div>
+        <div class="service-item" data-aos="zoom-in" data-aos-delay="200"><span class="service-icon">🔧</span><br><strong>Klempířství</strong><p>Oplechování, svody a detailní klempířské práce.</p></div>
+        <div class="service-item" data-aos="zoom-in" data-aos-delay="300"><span class="service-icon">🏘️</span><br><strong>Prodej výrobků</strong><p>Doplňky a produkty pro střechy i zahradu.</p></div>
+      </div>
+    </section>
+
+    <section id="galerie" class="gallery">
+      <h2 class="section-title" data-aos="fade-up">Realizace</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-aos="zoom-in"><img src="https://i.ibb.co/TxN3nFfj/IMG-20250720-WA0092.jpg" alt="Realizace střechy"></div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100"><img src="https://i.ibb.co/KjZc5SGj/IMG-20250720-WA0111.jpg" alt="Realizace tesařství"></div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200"><img src="https://i.ibb.co/8L3Nsgfs/IMG-20250720-WA0009.jpg" alt="Realizace klempířství"></div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact">
+      <h2 class="section-title" data-aos="fade-up">Kontaktujte nás</h2>
+      <div class="contact-card" data-aos="fade-up">
+        <form>
+          <label class="field">Jméno<input type="text" name="name" required></label>
+          <label class="field">E-mail<input type="email" name="email" required></label>
+          <label class="field">Zpráva<textarea name="message" rows="5" required></textarea></label>
+          <button type="submit" class="btn btn-primary">Odeslat</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-mask"></div>
+      <div class="footer-card">
+        Web design by <strong>David Kozák International s.r.o. + GPT</strong><br>
+        📧 info@david-kozak.com | 🌐 www.david-kozak.com | 📞 +420 775 189 574
+        <div class="social-icons">
+          <img src="ikony_footer/Facebook.jpeg" alt="Facebook">
+          <img src="ikony_footer/Instagram.jpeg" alt="Instagram">
+          <img src="ikony_footer/TikTok.jpeg" alt="TikTok">
+          <img src="ikony_footer/YouTube.jpeg" alt="YouTube">
+          <img src="ikony_footer/Linked In.jpeg" alt="LinkedIn">
+          <img src="ikony_footer/Gmail.jpeg" alt="Gmail">
+        </div>
+        <img class="dki-logo" src="Black & Grey Elegant Typography Monogram Initials Logo.png" alt="DKI logo">
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, once: true, offset: 80 });
+  </script>
+  <!-- LEAVES FX (Once UI inspired) -->
+  <canvas id="weatherFx"></canvas>
+
+  <script>
+    const canvas = document.getElementById('weatherFx');
+    const ctx = canvas.getContext('2d');
+
+    const mouse = { x: -9999, y: -9999, active: false };
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.active = false;
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    function isDarkMode() {
+      return document.body.classList.contains('dark');
+    }
+
+    function getLeafPalette() {
+      return isDarkMode()
+        ? ['#ffcc00', '#ff8800', '#ffaa33', '#ff6600', '#ffee88']
+        : ['#c88a16', '#d6a52f', '#a96b18', '#e0b84a', '#8f5513'];
+    }
+
+    const layers = [
+      { count: 20, depth: 0.45, blur: 6, alpha: 0.32, sizeMin: 5, sizeMax: 9 },
+      { count: 26, depth: 0.8, blur: 14, alpha: 0.58, sizeMin: 7, sizeMax: 13 },
+      { count: 18, depth: 1.25, blur: 24, alpha: 0.86, sizeMin: 10, sizeMax: 18 }
+    ];
+
+    function createLeaf(layer) {
+      const palette = getLeafPalette();
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * (layer.sizeMax - layer.sizeMin) + layer.sizeMin,
+        speedY: (Math.random() * 0.28 + 0.11) * layer.depth,
+        speedX: (Math.random() * 0.34 - 0.17) * layer.depth,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.025 * layer.depth,
+        swing: Math.random() * Math.PI * 2,
+        color: palette[Math.floor(Math.random() * palette.length)],
+        layer
+      };
+    }
+
+    const leaves = layers.flatMap(layer => Array.from({ length: layer.count }, () => createLeaf(layer)));
+
+    function drawLeaf(leaf) {
+      const palette = getLeafPalette();
+      if (!palette.includes(leaf.color)) {
+        leaf.color = palette[Math.floor(Math.random() * palette.length)];
+      }
+
+      ctx.save();
+      ctx.translate(leaf.x, leaf.y);
+      ctx.rotate(leaf.rotation);
+
+      ctx.globalAlpha = leaf.layer.alpha;
+      ctx.shadowColor = leaf.color;
+      ctx.shadowBlur = leaf.layer.blur;
+      ctx.fillStyle = leaf.color;
+
+      ctx.beginPath();
+      ctx.ellipse(0, 0, leaf.size * 0.42, leaf.size, Math.PI / 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = leaf.layer.alpha * 0.9;
+      ctx.strokeStyle = isDarkMode() ? 'rgba(255,255,255,.28)' : 'rgba(50,25,8,.35)';
+      ctx.lineWidth = Math.max(0.8, leaf.size / 13);
+      ctx.beginPath();
+      ctx.moveTo(0, -leaf.size * 0.72);
+      ctx.lineTo(0, leaf.size * 0.72);
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    function repelFromMouse(leaf) {
+      if (!mouse.active) return;
+      const dx = leaf.x - mouse.x;
+      const dy = leaf.y - mouse.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const radius = 130 * leaf.layer.depth;
+
+      if (dist < radius && dist > 0.01) {
+        const force = (1 - dist / radius) * 2.2;
+        leaf.x += (dx / dist) * force * leaf.layer.depth;
+        leaf.y += (dy / dist) * force * leaf.layer.depth;
+        leaf.rotation += force * 0.025;
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const scrollFactor = window.scrollY * 0.0008;
+
+      leaves.forEach(leaf => {
+        drawLeaf(leaf);
+        repelFromMouse(leaf);
+
+        leaf.swing += 0.008 * leaf.layer.depth;
+        leaf.x += leaf.speedX + Math.sin(leaf.swing + scrollFactor) * 0.28 * leaf.layer.depth;
+        leaf.y += leaf.speedY + Math.cos(scrollFactor + leaf.swing) * 0.025;
+        leaf.rotation += leaf.rotationSpeed;
+
+        if (leaf.y > canvas.height + 40) {
+          leaf.y = -40;
+          leaf.x = Math.random() * canvas.width;
+        }
+        if (leaf.x < -60) leaf.x = canvas.width + 60;
+        if (leaf.x > canvas.width + 60) leaf.x = -60;
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  </script>
+
+  <style>
+    #weatherFx {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+  <script>
+    const mCanvas = document.getElementById('matrixFxCanvas');
+    const mCtx = mCanvas.getContext('2d');
+
+    function resizeMatrix() {
+      const rect = mCanvas.parentElement.getBoundingClientRect();
+      mCanvas.width = rect.width;
+      mCanvas.height = rect.height;
+      initMatrix();
+      renderMatrixStatic();
+    }
+    window.addEventListener('resize', resizeMatrix);
+
+    const spacing = 3.5;
+    const size = 2.15;
+    const dots = [];
+    let matrixStartTime = 0;
+    let matrixRunning = false;
+    let matrixFrame = null;
+    const matrixDuration = 3600;
+
+    function initMatrix() {
+      if (!mCanvas.width || !mCanvas.height) return;
+      dots.length = 0;
+      for (let x = 0; x < mCanvas.width; x += spacing) {
+        for (let y = 0; y < mCanvas.height; y += spacing) {
+          dots.push({
+            x,
+            y,
+            opacity: Math.random(),
+            phase: Math.random() * Math.PI * 2,
+            delay: Math.random() * 0.18
+          });
+        }
+      }
+    }
+
+    let t = 0;
+
+    function matrixColor(alpha) {
+      const isDark = document.body.classList.contains('dark');
+      return isDark
+        ? `rgba(255,190,0,${alpha})`
+        : `rgba(255,142,0,${alpha})`;
+    }
+
+    function renderMatrixStatic() {
+      if (!mCtx || !mCanvas.width) return;
+      mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+      dots.forEach(d => {
+        mCtx.shadowColor = 'rgba(255,180,0,.9)';
+        mCtx.shadowBlur = 8;
+        mCtx.fillStyle = matrixColor(0.10 + d.opacity * 0.22);
+        mCtx.fillRect(d.x, d.y, size, size);
+      });
+    }
+
+    function drawMatrixFx(now = performance.now()) {
+      const elapsed = now - matrixStartTime;
+      const progress = Math.min(elapsed / matrixDuration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+      t += 0.022;
+
+      const cx = mCanvas.width / 2;
+      const cy = mCanvas.height / 2;
+      const maxR = Math.sqrt(cx * cx + cy * cy);
+      const waveR = ease * maxR * 1.42;
+
+      dots.forEach(d => {
+        const dx = d.x - cx;
+        const dy = d.y - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distanceToWave = Math.abs(dist - waveR);
+        const waveWidth = maxR * 0.19;
+        const wave = Math.exp(-Math.pow(distanceToWave / waveWidth, 2) * 4.6);
+        const localProgress = Math.max(0, Math.min(1, (progress - d.delay) / (1 - d.delay)));
+
+        const intensity = 15;
+        const ox = dx / (dist || 1) * wave * intensity * (1 - progress * .2);
+        const oy = dy / (dist || 1) * wave * intensity * (1 - progress * .2);
+        const flicker = (Math.sin(t * 2.4 + d.phase) + 1) / 2;
+        const alpha = progress < 1
+          ? 0.08 + localProgress * .18 + wave * 0.78 + flicker * 0.16
+          : 0.14 + d.opacity * 0.24;
+
+        mCtx.shadowColor = 'rgba(255,185,0,1)';
+        mCtx.shadowBlur = progress < 1 ? 18 + wave * 28 : 10;
+        mCtx.fillStyle = matrixColor(Math.min(alpha,.95));
+        const dotSize = size + wave * 2.5;
+        mCtx.fillRect(d.x + ox, d.y + oy, dotSize, dotSize);
+      });
+
+      if (progress < 1) {
+        matrixFrame = requestAnimationFrame(drawMatrixFx);
+      } else {
+        matrixRunning = false;
+        matrixFrame = null;
+        renderMatrixStatic();
+      }
+    }
+
+    function startMatrixFx() {
+      if (matrixFrame) cancelAnimationFrame(matrixFrame);
+      matrixRunning = true;
+      matrixStartTime = performance.now();
+      matrixFrame = requestAnimationFrame(drawMatrixFx);
+    }
+
+    resizeMatrix();
+    document.getElementById('matrixPanel').addEventListener('mouseenter', startMatrixFx);
+    document.getElementById('matrixPanel').addEventListener('click', startMatrixFx);
+  </script>
+  <script>
+    // SAFE ULTRA++ micro-interactions – bez zásahu do struktury HTML
+    (function () {
+      const dot = document.querySelector('.cursor-dot');
+      const ring = document.querySelector('.cursor-ring');
+      if (!dot || !ring || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      window.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.left = mx + 'px';
+        dot.style.top = my + 'px';
+      });
+
+      function cursorLoop() {
+        rx += (mx - rx) * .16;
+        ry += (my - ry) * .16;
+        ring.style.left = rx + 'px';
+        ring.style.top = ry + 'px';
+        requestAnimationFrame(cursorLoop);
+      }
+      cursorLoop();
+
+      document.querySelectorAll('a, .btn, .badge, .fx-panel, .service-item, button').forEach((el) => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+      });
+    })();
+
+    (function () {
+      const heroImage = document.querySelector('.intro-img');
+      if (!heroImage) return;
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        heroImage.style.transform = `translateY(${y * 0.055}px)`;
+      }, { passive: true });
+    })();
+  </script>
+<script>
+// ONCE UI style cursor mask++ (footer)
+(function(){
+  const footer = document.querySelector('.footer');
+  const mask = document.querySelector('.footer-mask');
+  if(!footer || !mask) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let tx = 50, ty = 50, cx = 50, cy = 50;
+
+  function setPosition(x, y) {
+    mask.style.setProperty('--mx', x + 'px');
+    mask.style.setProperty('--my', y + 'px');
+    footer.style.setProperty('--mx', x + 'px');
+    footer.style.setProperty('--my', y + 'px');
+  }
+
+  footer.addEventListener('mousemove', (e)=>{
+    const rect = footer.getBoundingClientRect();
+    tx = e.clientX - rect.left;
+    ty = e.clientY - rect.top;
+    if (prefersReduced) setPosition(tx, ty);
+  });
+
+  footer.addEventListener('mouseleave', ()=>{
+    const rect = footer.getBoundingClientRect();
+    tx = rect.width / 2;
+    ty = rect.height;
+  });
+
+  function loop(){
+    if(!prefersReduced){
+      cx += (tx - cx) * .12;
+      cy += (ty - cy) * .12;
+      setPosition(cx, cy);
+      requestAnimationFrame(loop);
+    }
+  }
+
+  loop();
+})();
+</script>
+</body>
+</html>
