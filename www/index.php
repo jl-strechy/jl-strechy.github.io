@@ -2,24 +2,268 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>JL střechy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="JL střechy – Střešní práce s citem a dřevem. Tesařství, klempířství, prodej výrobků.">
-  <meta name="keywords" content="střechy, tesařství, klempířství, dřevo, řemeslo, Česká republika">
-  <meta name="author" content="JL Střechy">
+  <title>JL Střechy – Tesařství a klempířství</title>
+  <meta name="description" content="JL střechy – Premium řemeslo bez železného přikrášlování. Střechy, tesařství, klempířství.">
+  <meta name="keywords" content="střechy, tesařství, klempířství, dřevo, řemeslo">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="JL střechy">
-  <meta property="og:image" content="images/preview.jpg">
-  <meta property="og:description" content="Kvalitní řemeslo bez železa. Vizuálně i funkčně precizní střechy.">
-  <meta property="og:url" content="https://jlstrechy.cz">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JL střechy">
-  <meta name="twitter:description" content="Střechy stavíme s citem a dřevem.">
-  <meta name="twitter:image" content="images/preview.jpg">
+  
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style/css.css">
+  <link rel="stylesheet" href="style/design.css">
+</head>
+<body>
+  <!-- Cursor elements pro custom cursor animaci -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
 
+  <!-- Login Bar - PRIORITA 3 -->
+  <div class="login-bar">
+    <?php
+      session_start();
+      if(isset($_SESSION['user_id'])) {
+        echo '<div class="user-info">👤 ' . htmlspecialchars($_SESSION['username'] ?? 'Uživatel') . '</div>';
+        echo '<a href="dashboard.php">Dashboard</a>';
+        echo '<a href="logout.php">Odhlásit</a>';
+      } else {
+        echo '<a href="login.php">Přihlášení</a>';
+        echo '<a href="register.php">Registrace</a>';
+      }
+    ?>
+  </div>
+
+  <div class="container">
+    <!-- Sticky Menu - PRIORITA 1 & 2 -->
+    <nav class="main-nav">
+      <div class="menu-logo">
+        <a href="index.php" style="text-decoration: none;">
+          <img src="images/logo/logo.png" alt="JL Střechy logo" style="width: 35px; height: 35px;">
+        </a>
+      </div>
+
+      <!-- Menu Items s Submenu -->
+      <div class="menu-group">
+        <a href="index.php">Úvod</a>
+      </div>
+
+      <div class="menu-group">
+        <a href="o-nas.php">O nás</a>
+        <ul class="submenu">
+          <li><a href="o-nas.php?section=profil">Profil zakladatele</a></li>
+          <li><a href="o-nas.php?section=mise">Mise a hodnoty</a></li>
+          <li><a href="o-nas.php?section=doklady">Oficiální doklady</a></li>
+          <li><a href="o-nas.php?section=certifikace">Certifikace</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <a href="sluzby.php">Služby</a>
+        <ul class="submenu">
+          <li><a href="sluzby.php?type=remeslo">Řemeslné zakázky</a></li>
+          <li><a href="sluzby.php?type=docasne">Dočasné zaměstnávání</a></li>
+          <li><a href="sluzby.php?type=vyroba">Výroba a e-shop</a></li>
+          <li><a href="sluzby.php?type=vypadek">Náhradní řešení</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <a href="pro-firmy.php">Pro firmy</a>
+        <ul class="submenu">
+          <li><a href="pro-firmy.php?section=spoluprace">Jak probíhá spolupráce</a></li>
+          <li><a href="pro-firmy.php?section=vyhody">Přehled výhod</a></li>
+          <li><a href="pro-firmy.php?section=reference">Reference a zakázky</a></li>
+          <li><a href="pro-firmy.php?section=poptavka">Zadat poptávku</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <a href="pro-pracovniky.php">Pro pracovníky</a>
+        <ul class="submenu">
+          <li><a href="pro-pracovniky.php?section=pridat">Jak se přidat</a></li>
+          <li><a href="pro-pracovniky.php?section=vyhody">Výhody práce</a></li>
+          <li><a href="pro-pracovniky.php?section=formular">Formulář</a></li>
+          <li><a href="pro-pracovniky.php?section=kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="menu-group">
+        <a href="galerie.php">Galerie</a>
+      </div>
+
+      <div class="menu-group">
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+      <button id="toggle-darkmode" title="Tmavý režim">🌙</button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" data-aos="fade-up">
+      <div class="intro-text">
+        <div class="eyebrow">✨ Premium kvalita</div>
+        <h1>Postavme<br>to správně!</h1>
+        <p>Střechy stavíme s citem a dřevem. Bez zbytečného желeza. Řemeslo bez kompromisů – to je naše filosofie.</p>
+        
+        <div class="hero-actions">
+          <a href="sluzby.php" class="btn btn-primary">Naše služby</a>
+          <a href="#kontakt" class="btn btn-glass">Kontakt</a>
+        </div>
+
+        <div class="badge-row">
+          <a href="o-nas.php" class="badge">📋 O nás</a>
+          <a href="galerie.php" class="badge">📸 Galerie</a>
+          <a href="pro-firmy.php" class="badge">💼 Pro firmy</a>
+        </div>
+      </div>
+
+      <div class="intro-img" style="background-image: url('images/hero/worker.jpg');" data-aos="fade-left"></div>
+    </section>
+
+    <!-- SLUŽBY SECTION -->
+    <section class="services" data-aos="fade-up">
+      <h2 class="section-title">Naše služby</h2>
+      
+      <div class="service-grid">
+        <div class="service-item" data-aos="zoom-in">
+          <div class="service-icon">🏗️</div>
+          <strong>Střechy</strong>
+          <p>Kompletní střešní práce s maximální precizností a péčí o detaily.</p>
+        </div>
+        
+        <div class="service-item" data-aos="zoom-in">
+          <div class="service-icon">🪵</div>
+          <strong>Tesařství</strong>
+          <p>Kvalitné tesařské práce – od krovů po stylové dekorativní prvky.</p>
+        </div>
+        
+        <div class="service-item" data-aos="zoom-in">
+          <div class="service-icon">🔧</div>
+          <strong>Klempířství</strong>
+          <p>Profesionální klempířské služby – vodní systémy, instalace, údržba.</p>
+        </div>
+        
+        <div class="service-item" data-aos="zoom-in">
+          <div class="service-icon">📦</div>
+          <strong>Prodej výrobků</strong>
+          <p>Speciální dřevěné výrobky a řemeslné prvky – e-shop k dispozici.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="sluzby.php" class="btn btn-primary">Všechny služby</a>
+      </div>
+    </section>
+
+    <!-- GALERIE SECTION -->
+    <section class="gallery" data-aos="fade-up">
+      <h2 class="section-title">Naše realizace</h2>
+      
+      <div class="gallery-grid" id="gallery-preview">
+        <!-- Obsah bude naplněn z galerie -->
+        <img src="images/gallery/img-1.jpg" alt="Realizace 1" data-aos="zoom-in" loading="lazy">
+        <img src="images/gallery/img-2.jpg" alt="Realizace 2" data-aos="zoom-in" loading="lazy">
+        <img src="images/gallery/img-3.jpg" alt="Realizace 3" data-aos="zoom-in" loading="lazy">
+        <img src="images/gallery/img-4.jpg" alt="Realizace 4" data-aos="zoom-in" loading="lazy">
+        <img src="images/gallery/img-5.jpg" alt="Realizace 5" data-aos="zoom-in" loading="lazy">
+        <img src="images/gallery/img-6.jpg" alt="Realizace 6" data-aos="zoom-in" loading="lazy">
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="galerie.php" class="btn btn-primary">Celá galerie</a>
+      </div>
+    </section>
+
+    <!-- KONTAKT SECTION -->
+    <section class="contact" id="kontakt" data-aos="fade-up">
+      <h2 class="section-title">Kontaktujte nás</h2>
+      
+      <div class="contact-card">
+        <form action="form-handler.php" method="POST">
+          <input type="hidden" name="csrf_token" value="<?php echo bin2hex(random_bytes(32)); ?>">
+          
+          <div>
+            <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Jméno a příjmení:</label>
+            <input type="text" id="name" name="name" required placeholder="Vaše jméno">
+          </div>
+
+          <div>
+            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">E-mail:</label>
+            <input type="email" id="email" name="email" required placeholder="váš@email.cz">
+          </div>
+
+          <div>
+            <label for="phone" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Telefon:</label>
+            <input type="tel" id="phone" name="phone" placeholder="+420 123 456 789">
+          </div>
+
+          <div>
+            <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Zpráva:</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Vaše zpráva..." style="resize: vertical;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Odeslat zprávu</button>
+        </form>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem; color: var(--muted);">
+        <p>📞 +420 775 189 574 | 📧 info@jlstrechy.cz</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-icons">
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" title="Facebook">
+            <img src="images/social_footer/facebook-ikon.jpeg" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" title="Instagram">
+            <img src="images/social_footer/pintress-ikon.jpeg" alt="Instagram">
+          </a>
+          <a href="https://wa.me/420775189574" target="_blank" rel="noopener" title="WhatsApp">
+            <img src="images/social_footer/whatsapp-ikon.jpeg" alt="WhatsApp">
+          </a>
+          <a href="tel:+420775189574" title="Zavolat">
+            <img src="images/social_footer/call-ikon.jpeg" alt="Telefon">
+          </a>
+        </div>
+
+        <p style="margin: 1rem 0; font-size: 0.9rem;">
+          <strong>JL STŘECHY S.R.O.</strong><br>
+          IČ: 12345678 | DIČ: CZ12345678<br>
+          📧 info@jlstrechy.cz | 📞 +420 775 189 574<br>
+          © 2025 JL Střechy. Všechna práva vyhrazena.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/main-design.js"></script>
+
+  <script>
+    // Inicializace AOS animací
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+      offset: 100
+    });
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JL Střechy – Tesařství a klempířství</title>
+  <meta name="description" content="JL střechy – Premium řemeslo bez železného přikrášlování. Střechy, tesařství, klempířství.">
+  <meta name="keywords" content="střechy, tesařství, klempířství, dřevo, řemeslo">
+  <meta name="robots" content="index, follow">
+  
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/design.css">
 </head>
 <body>
   <div class="container">

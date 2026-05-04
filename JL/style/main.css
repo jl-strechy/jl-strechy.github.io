@@ -1,0 +1,732 @@
+/* =========================================================
+   JL STŘECHY – main.css
+   Premium glass / wood / gold visual style
+   Cesta: JL/style/main.css
+   ========================================================= */
+
+:root {
+  --page: #000000;
+  --surface: #fff7e8;
+  --surface-2: #f4e4cc;
+  --ink: #1e1712;
+  --muted: #6e5948;
+  --brown: #1e120d;
+  --brown-2: #2d1f1a;
+  --gold: #f0b000;
+  --gold-2: #ffd766;
+  --glass: rgba(255, 255, 255, 0.22);
+  --glass-strong: rgba(255, 255, 255, 0.36);
+  --glass-border: rgba(255, 255, 255, 0.38);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --radius-xl: 28px;
+  --radius-l: 20px;
+  --radius-m: 14px;
+}
+
+body.dark {
+  --surface: #121212;
+  --surface-2: #1b1b1b;
+  --ink: #f5f5f5;
+  --muted: #c8bcae;
+  --brown: #090909;
+  --brown-2: #16110f;
+  --glass: rgba(255, 255, 255, 0.10);
+  --glass-strong: rgba(255, 255, 255, 0.16);
+  --glass-border: rgba(255, 255, 255, 0.20);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Aptos, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(240, 176, 0, 0.22), transparent 34rem),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.10), transparent 28rem),
+    var(--page);
+  color: var(--ink);
+  display: flex;
+  justify-content: center;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+
+section {
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   CURSOR PLACEHOLDERS – funkce bude v js/main.js
+   ========================================================= */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.cursor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 18px rgba(240, 176, 0, 0.8);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(240, 176, 0, 0.55);
+}
+
+body.ultra-cursor .cursor-dot,
+body.ultra-cursor .cursor-ring {
+  display: block;
+}
+
+body.cursor-active .cursor-ring {
+  width: 46px;
+  height: 46px;
+  border-color: rgba(255, 215, 100, 0.9);
+  box-shadow: 0 0 22px rgba(240, 176, 0, 0.45);
+}
+
+/* =========================================================
+   TOPBAR / MENU
+   ========================================================= */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.25rem;
+  margin: 0.75rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-l);
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.14);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: max-content;
+  font-weight: 900;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--gold), #fff2b8);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 25px rgba(240, 176, 0, 0.35);
+  overflow: hidden;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.menu a,
+.toggle-theme {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.55rem 0.85rem;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.menu a:hover,
+.toggle-theme:hover {
+  background: var(--glass-strong);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.20), 0 10px 25px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1.02fr;
+  align-items: stretch;
+  position: relative;
+}
+
+.intro-text {
+  padding: 5rem 2.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  gap: 0.45rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(240, 176, 0, 0.14);
+  color: #6a4900;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.intro-text h1 {
+  margin: 0 0 1rem;
+  font-family: "Arial Black", Impact, Aptos, sans-serif;
+  font-size: clamp(2.6rem, 6vw, 5.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.22rem;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.intro-text p {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 1.7rem;
+}
+
+.intro-img {
+  position: relative;
+  min-height: 90vh;
+  background: url('../images/hero/worker.jpg') no-repeat center top / cover;
+}
+
+.intro-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--surface) 0%, rgba(255, 247, 232, 0.35) 35%, rgba(0, 0, 0, 0.08) 100%);
+  pointer-events: none;
+}
+
+body.dark .intro-img::after {
+  background: linear-gradient(90deg, var(--surface) 0%, rgba(18, 18, 18, 0.25) 35%, rgba(0, 0, 0, 0.15) 100%);
+}
+
+/* =========================================================
+   BUTTONS + BADGES
+   ========================================================= */
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.9rem 1.25rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1d1300;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-2));
+  box-shadow: 0 14px 30px rgba(240, 176, 0, 0.34);
+}
+
+.btn-glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--ink);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+}
+
+.badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  padding: 0.62rem 1rem;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.035rem;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(240, 176, 0, 0.34);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.badge::before {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -70%;
+  width: 60%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: rotate(18deg);
+  animation: badgeShine 4.5s ease-in-out infinite;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 0 0 3px rgba(240, 176, 0, 0.16), 0 16px 36px rgba(0, 0, 0, 0.20);
+}
+
+@keyframes badgeShine {
+  0%, 55% { left: -70%; }
+  100% { left: 130%; }
+}
+
+/* =========================================================
+   MATRIX PANEL
+   ========================================================= */
+
+.fx-panel {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  width: min(420px, calc(100% - 4rem));
+  min-height: 190px;
+  border: 1px solid rgba(255, 210, 80, 0.46);
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 190, 0, 0.24), transparent 62%),
+    rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  box-shadow:
+    0 0 42px rgba(255, 184, 0, 0.28),
+    0 22px 55px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+  overflow: hidden;
+  z-index: 4;
+  cursor: pointer;
+}
+
+.fx-panel canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.matrix-content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Arial Black", Impact, Aptos, sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.75rem);
+  line-height: 1.1;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(255, 184, 0, 0.85), 0 4px 18px rgba(0, 0, 0, 0.55);
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}
+
+.matrix-content span {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: "Segoe UI", Aptos, Arial, sans-serif;
+  font-size: 0.55em;
+  letter-spacing: 0.16rem;
+  font-weight: 800;
+}
+
+.fx-panel:hover .matrix-content {
+  opacity: 0.28;
+  transform: scale(0.98);
+  filter: blur(0.3px);
+}
+
+/* =========================================================
+   SLUŽBY / CSS WOOD CARDS BEZ OBRÁZKŮ
+   ========================================================= */
+
+.services {
+  background: linear-gradient(180deg, var(--brown-2), var(--brown));
+  color: #fff;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.service-item {
+  min-height: 190px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(155%);
+  -webkit-backdrop-filter: blur(14px) saturate(155%);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  color: #fff;
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  isolation: isolate;
+}
+
+.service-item::before {
+  content: "";
+  position: absolute;
+  inset: -22px;
+  z-index: 0;
+  opacity: 0.62;
+  filter: blur(1.4px) contrast(1.65) saturate(1.35);
+  transform: scale(1.08);
+  background:
+    repeating-linear-gradient(
+      83deg,
+      rgba(255, 231, 165, 0.34) 0px,
+      rgba(255, 231, 165, 0.34) 2px,
+      rgba(115, 55, 15, 0.34) 3px,
+      rgba(115, 55, 15, 0.34) 7px,
+      rgba(32, 14, 5, 0.10) 8px,
+      rgba(32, 14, 5, 0.10) 15px
+    ),
+    repeating-linear-gradient(
+      -10deg,
+      rgba(255, 245, 200, 0.16) 0px,
+      rgba(255, 245, 200, 0.16) 1px,
+      transparent 2px,
+      transparent 11px
+    ),
+    repeating-radial-gradient(
+      ellipse at 30% 55%,
+      rgba(255, 225, 150, 0.20) 0px,
+      rgba(255, 225, 150, 0.20) 2px,
+      transparent 3px,
+      transparent 12px
+    ),
+    linear-gradient(90deg, #241105 0%, #6a3a18 25%, #a4652d 48%, #3b1d0a 72%, #8a5729 100%);
+  mask-image: radial-gradient(circle at center, #000 62%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 62%, transparent 100%);
+}
+
+.service-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.72)),
+    radial-gradient(circle at top left, rgba(255, 210, 90, 0.28), transparent 45%);
+}
+
+.service-icon,
+.service-item strong,
+.service-item p {
+  position: relative;
+  z-index: 2;
+}
+
+.service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.75rem;
+  border-radius: 16px;
+  font-size: 2rem;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 220, 130, 0.35);
+  filter: drop-shadow(0 0 8px rgba(255, 180, 0, 0.75));
+}
+
+.service-item strong {
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.65);
+}
+
+.service-item p {
+  display: block;
+  margin: 0.55rem 0 0;
+  color: rgba(255, 255, 255, 0.90);
+  line-height: 1.45;
+  font-size: 0.92rem;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.7);
+}
+
+.service-item:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34), 0 0 0 3px rgba(240, 176, 0, 0.12);
+}
+
+/* =========================================================
+   GALERIE
+   ========================================================= */
+
+.gallery {
+  background: var(--surface);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.20);
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.035);
+  filter: contrast(1.08) saturate(1.1);
+}
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+
+.contact {
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+}
+
+.contact-card {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.4rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-l);
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(14px) saturate(155%);
+  -webkit-backdrop-filter: blur(14px) saturate(155%);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  display: grid;
+  gap: 0.85rem;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 14px;
+  padding: 0.85rem;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.75);
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(240, 176, 0, 0.25);
+  border-color: var(--gold);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  background: var(--brown);
+  color: #fff;
+  padding: 0.75rem;
+}
+
+.footer-card {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0.7rem;
+  font-size: 8px;
+  line-height: 1.35;
+  text-align: center;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(155%);
+  -webkit-backdrop-filter: blur(14px) saturate(155%);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  border-radius: var(--radius-m);
+}
+
+/* =========================================================
+   WEATHER / LEAVES CANVAS – leaves.js vytvoří canvas
+   ========================================================= */
+
+#weatherFx {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 820px) {
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .menu {
+    justify-content: flex-start;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-text {
+    padding: 4rem 1.25rem 2rem;
+  }
+
+  .intro-img {
+    min-height: 54vh;
+  }
+
+  .intro-img::after {
+    background: linear-gradient(180deg, transparent, var(--surface));
+  }
+
+  .fx-panel {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    width: calc(100% - 2rem);
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  section {
+    padding: 3rem 1rem;
+  }
+
+  .intro-text h1 {
+    letter-spacing: 0.12rem;
+  }
+
+  .badge-row,
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
