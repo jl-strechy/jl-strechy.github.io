@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /JL/admin.html
+Disallow: /JL/admin-login.html
+
+Sitemap: https://jl-strechy.github.io/sitemap.xml

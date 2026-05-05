@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jlstrechy.cz/</loc>
-    <lastmod>2024-05-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://jl-strechy.github.io/</loc>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://jlstrechy.cz/galerie.php</loc>
-    <lastmod>2024-05-01</lastmod>
+    <loc>https://jl-strechy.github.io/JL/index.html</loc>
     <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jl-strechy.github.io/JL/o-nas.html</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://jlstrechy.cz/projekt.php</loc>
-    <lastmod>2024-05-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://jl-strechy.github.io/JL/sluzby.html</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jl-strechy.github.io/JL/pro-firmy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jl-strechy.github.io/JL/pro-pracovniky.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jl-strechy.github.io/JL/galerie.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
