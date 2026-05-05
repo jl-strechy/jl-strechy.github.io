@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro firmy - JL Střechy</title>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="ultra-cursor">
+  <div class="container">
+    <div class="topbar"><a class="brand" href="index.html"><div class="brand-mark"><img src="images/logo/logo.jpg" alt="JL Střechy logo"></div><div>JL STŘECHY</div></a><div class="menu"><a href="index.html">Úvod</a><a href="o-nas.html">O nás</a><a href="sluzby.html">Služby</a><div class="menu-group"><a href="pro-firmy.html">Pro firmy</a><div class="submenu"><a href="#spoluprace">Spolupráce</a><a href="#vyhody">Výhody</a><a href="#reference">Reference</a><a href="#poptavka">Poptávka</a></div></div><a href="pro-pracovniky.html">Pro pracovníky</a><a href="galerie.html">Galerie</a><a href="index.html#kontakt">Kontakt</a><a href="admin-login.html">Admin</a><button class="toggle-theme" type="button">🌗</button></div></div>
+    <main class="page-shell">
+      <section class="page-hero"><div><h1>Pro firmy</h1><p>Subdodávky, kapacity a řemeslná spolupráce pro stavební firmy.</p></div><div class="page-note">B2B stránka bez PHP. Formulář je zatím statický placeholder.</div></section>
+      <div class="content-stack">
+        <section class="content-card" id="spoluprace"><h2>Jak probíhá spolupráce</h2><div class="feature-grid"><div><h3>1. Zadání</h3><p>Rozsah, termín, místo a technické nároky.</p></div><div><h3>2. Nabídka</h3><p>Jasný rozsah prací a orientační harmonogram.</p></div><div><h3>3. Realizace</h3><p>Řemeslný tým, průběžná komunikace a předání.</p></div></div></section>
+        <section class="content-card" id="vyhody"><h2>Přehled výhod</h2><ul class="pill-list"><li>Flexibilní kapacity</li><li>Střešní specializace</li><li>Transparentní domluva</li><li>Reference z realizací</li></ul></section>
+        <section class="content-card" id="reference"><h2>Reference a zakázky</h2><p>Ukázky najdete v galerii realizací. Detailní firemní reference lze doplnit jako další samostatnou stránku.</p><a class="btn btn-primary" href="galerie.html">Prohlédnout galerii</a></section>
+        <section class="quote-section" id="poptavka">
+          <div class="quote-rail" aria-hidden="true">
+            <span>24h</span>
+            <strong>Reakce na poptávku</strong>
+            <p>Zakázku předběžně roztřídíme podle typu práce, lokality a termínu.</p>
+          </div>
+          <div class="quote-head">
+            <div>
+              <h2>Zadat poptávku</h2>
+              <p>Strukturovaný formulář pro rychlé nacenění. Vyplňte rozsah, termín a kontakt, zbytek doladíme telefonicky.</p>
+            </div>
+            <div class="quote-steps" aria-label="Průběh poptávky">
+              <span class="is-active">Zadání</span>
+              <span>Upřesnění</span>
+              <span>Nabídka</span>
+            </div>
+          </div>
+
+          <form class="quote-form" data-static-form data-quote-form>
+            <div class="quote-grid">
+              <label class="quote-field quote-field-wide">
+                <span>Typ zakázky</span>
+                <select name="type" required>
+                  <option>Kompletní střecha</option>
+                  <option>Rekonstrukce střechy</option>
+                  <option>Tesařské práce</option>
+                  <option>Klempířské práce</option>
+                  <option>Náhradní kapacity pro firmu</option>
+                </select>
+              </label>
+              <label class="quote-field">
+                <span>Název firmy</span>
+                <input type="text" name="company" placeholder="Stavební firma s.r.o." required>
+              </label>
+              <label class="quote-field">
+                <span>Kontaktní osoba</span>
+                <input type="text" name="contact" placeholder="Jméno a příjmení" required>
+              </label>
+              <label class="quote-field">
+                <span>E-mail</span>
+                <input type="email" name="email" placeholder="email@firma.cz" required>
+              </label>
+              <label class="quote-field">
+                <span>Telefon</span>
+                <input type="tel" name="phone" placeholder="+420 775 189 574">
+              </label>
+              <label class="quote-field">
+                <span>Lokalita</span>
+                <input type="text" name="location" placeholder="Město / okres">
+              </label>
+              <label class="quote-field">
+                <span>Preferovaný termín</span>
+                <input type="text" name="date" placeholder="Např. červen 2026">
+              </label>
+              <label class="quote-field">
+                <span>Orientační rozsah</span>
+                <input type="text" name="scope" placeholder="m², počet lidí, délka prací">
+              </label>
+              <label class="quote-field">
+                <span>Rozpočet</span>
+                <select name="budget">
+                  <option>Potřebuji nacenit</option>
+                  <option>Do 100 000 Kč</option>
+                  <option>100 000 - 300 000 Kč</option>
+                  <option>300 000 Kč a více</option>
+                </select>
+              </label>
+              <label class="quote-field quote-field-wide">
+                <span>Popis projektu</span>
+                <textarea name="message" rows="6" placeholder="Popište stav objektu, rozsah prací, termín, materiál a případné přílohy." required></textarea>
+              </label>
+            </div>
+
+            <div class="quote-options" aria-label="Doplňující informace">
+              <label><input type="checkbox" name="needVisit"> Potřebuji zaměření na místě</label>
+              <label><input type="checkbox" name="hasDocs"> Mám projektovou dokumentaci</label>
+              <label><input type="checkbox" name="urgent"> Spěchá to</label>
+            </div>
+
+            <div class="quote-footer">
+              <div class="quote-summary" data-quote-summary>Vyberte typ zakázky a doplňte základní údaje.</div>
+              <button class="btn btn-primary" type="submit">Odeslat poptávku</button>
+            </div>
+            <div class="form-status"></div>
+          </form>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script><script src="js/main.js"></script><script src="site.js"></script><script>AOS.init({ duration: 900, once: true, offset: 80 });</script>
+</body>
+</html>

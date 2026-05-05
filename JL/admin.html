@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrace - JL Střechy</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body data-admin-page>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <img src="images/logo/logo.jpg" alt="JL Střechy">
+        <div>
+          <strong>JL STŘECHY</strong>
+          <span>Admin panel</span>
+        </div>
+      </div>
+
+      <nav class="admin-tabs" aria-label="Administrace">
+        <button class="admin-tab" type="button" data-tab-target="dashboard" aria-selected="true">Dashboard <span>01</span></button>
+        <button class="admin-tab" type="button" data-tab-target="gallery" aria-selected="false">Galerie <span>02</span></button>
+        <button class="admin-tab" type="button" data-tab-target="projects" aria-selected="false">Projekty <span>03</span></button>
+        <button class="admin-tab" type="button" data-tab-target="messages" aria-selected="false">Zprávy <span>04</span></button>
+        <button class="admin-tab" type="button" data-tab-target="settings" aria-selected="false">Nastavení <span>05</span></button>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div>
+          <strong>Statická administrace</strong>
+          <div class="muted">UI prototyp bez PHP a databáze</div>
+        </div>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
+          <a class="admin-btn secondary" href="index.html">Zobrazit web</a>
+          <button class="admin-btn" type="button" data-admin-logout>Odhlásit</button>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <section class="admin-panel is-active" id="dashboard">
+          <div class="admin-title">
+            <div>
+              <h1>Dashboard</h1>
+              <p class="muted">Rychlý přehled obsahu a stavů webu.</p>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <div class="admin-card metric"><span class="muted">Projekty</span><strong data-gallery-count>0</strong></div>
+            <div class="admin-card metric"><span class="muted">Fotografie</span><strong data-photo-count>0</strong></div>
+            <div class="admin-card metric"><span class="muted">Nové zprávy</span><strong>3</strong></div>
+            <div class="admin-card metric"><span class="muted">Stav webu</span><strong>OK</strong></div>
+          </div>
+
+          <div class="admin-grid" style="margin-top:1rem;">
+            <div class="admin-card">
+              <h2>Rychlé úkoly</h2>
+              <form class="admin-task-form" data-task-form>
+                <input type="text" name="task" placeholder="Nový úkol" required>
+                <button class="admin-btn" type="submit">Přidat</button>
+              </form>
+              <div class="admin-checklist" data-task-list></div>
+            </div>
+            <div class="admin-card">
+              <h2>Poznámka</h2>
+              <p>Tenhle admin panel je statický návrh. Může běžet na GitHub Pages, ale změny zatím neukládá do souborů ani databáze.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="gallery">
+          <div class="admin-title">
+            <div>
+              <h1>Galerie</h1>
+              <p class="muted">Správa fotek a projektových alb.</p>
+            </div>
+            <button class="admin-btn" type="button">Přidat fotky</button>
+          </div>
+          <div class="admin-card">
+            <div class="project-admin-list" data-admin-projects></div>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="projects">
+          <div class="admin-title">
+            <div>
+              <h1>Projekty</h1>
+              <p class="muted">Obsah detailů realizací a pořadí v galerii.</p>
+            </div>
+            <button class="admin-btn" type="button">Nový projekt</button>
+          </div>
+          <div class="admin-grid">
+            <div class="admin-card">
+              <h2>Editace projektu</h2>
+              <form class="admin-form">
+                <label>Název projektu<input type="text" value="Kompletní rekonstrukce střechy"></label>
+                <label>Kategorie<select><option>Střechy</option><option>Tesařství</option><option>Klempířství</option></select></label>
+                <label>Popis<textarea rows="6">Placeholder pro popis zakázky, rozsah prací a lokalitu.</textarea></label>
+                <button class="admin-btn" type="button">Uložit koncept</button>
+              </form>
+            </div>
+            <div class="admin-card">
+              <h2>Publikační nastavení</h2>
+              <table class="admin-table">
+                <tr><th>Položka</th><th>Hodnota</th></tr>
+                <tr><td>Viditelnost</td><td>Publikováno</td></tr>
+                <tr><td>Priorita</td><td>Top reference</td></tr>
+                <tr><td>URL</td><td>projekt.html?projekt=...</td></tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="messages">
+          <div class="admin-title">
+            <div>
+              <h1>Zprávy</h1>
+              <p class="muted">Placeholder inbox pro formuláře z webu.</p>
+            </div>
+          </div>
+          <div class="message-list">
+            <div class="message-item"><div><strong>Nová poptávka</strong><div class="muted">Rekonstrukce střechy, Ústí nad Labem</div></div><span class="status-pill">Nové</span></div>
+            <div class="message-item"><div><strong>Spolupráce firma</strong><div class="muted">Potřeba tesařů na 14 dní</div></div><span class="status-pill">B2B</span></div>
+            <div class="message-item"><div><strong>Pracovník</strong><div class="muted">Zkušenosti s klempířinou</div></div><span class="status-pill">HR</span></div>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="settings">
+          <div class="admin-title">
+            <div>
+              <h1>Nastavení</h1>
+              <p class="muted">Základní informace webu.</p>
+            </div>
+          </div>
+          <div class="admin-grid">
+            <div class="admin-card">
+              <h2>Kontakt</h2>
+              <form class="admin-form">
+                <label>E-mail<input type="email" value="info@jlstrechy.cz"></label>
+                <label>Telefon<input type="tel" value="+420 775 189 574"></label>
+                <label>Lokalita<input type="text" value="Ústecký kraj a okolí"></label>
+                <button class="admin-btn" type="button">Uložit nastavení</button>
+              </form>
+            </div>
+            <div class="admin-card">
+              <h2>Bezpečnost</h2>
+              <p>Pro produkční login bude potřeba backend, Supabase/Auth0/Firebase, nebo hostingová auth vrstva. `localStorage` slouží jen pro demo průchod UI.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="projects-data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

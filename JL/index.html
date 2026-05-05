@@ -838,6 +838,7 @@
       100% { background-position: center bottom; }
     }
 </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body class="ultra-cursor">
   <div class="cursor-dot" aria-hidden="true"></div>
@@ -849,17 +850,47 @@
         <div>JL STŘECHY</div>
       </div>
       <div class="menu">
+        <a href="index.html">Úvod</a>
         <div class="menu-group">
-          <a href="#sluzby">Služby</a>
+          <a href="o-nas.html">O nás</a>
           <div class="submenu">
-            <a href="#sluzby">Střechy</a>
-            <a href="#sluzby">Tesařství</a>
-            <a href="#sluzby">Klempířství</a>
+            <a href="o-nas.html#profil">Profil zakladatele</a>
+            <a href="o-nas.html#mise">Mise a hodnoty</a>
+            <a href="o-nas.html#doklady">Doklady</a>
+            <a href="o-nas.html#certifikace">Certifikace</a>
           </div>
         </div>
-        <a href="#galerie">Galerie</a>
+        <div class="menu-group">
+          <a href="sluzby.html">Služby</a>
+          <div class="submenu">
+            <a href="sluzby.html#remeslo">Řemeslné zakázky</a>
+            <a href="sluzby.html#docasne">Dočasné zaměstnávání</a>
+            <a href="sluzby.html#vyroba">Výroba a e-shop</a>
+            <a href="sluzby.html#vypadek">Náhradní řešení</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <a href="pro-firmy.html">Pro firmy</a>
+          <div class="submenu">
+            <a href="pro-firmy.html#spoluprace">Spolupráce</a>
+            <a href="pro-firmy.html#vyhody">Výhody</a>
+            <a href="pro-firmy.html#reference">Reference</a>
+            <a href="pro-firmy.html#poptavka">Poptávka</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <a href="pro-pracovniky.html">Pro pracovníky</a>
+          <div class="submenu">
+            <a href="pro-pracovniky.html#pridat">Jak se přidat</a>
+            <a href="pro-pracovniky.html#vyhody">Výhody práce</a>
+            <a href="pro-pracovniky.html#formular">Formulář</a>
+            <a href="pro-pracovniky.html#kontakt-prace">Kontakt</a>
+          </div>
+        </div>
+        <a href="galerie.html">Galerie</a>
         <a href="#kontakt">Kontakt</a>
-        <button class="toggle-theme" onclick="document.body.classList.toggle('dark')">🌗</button>
+        <a href="admin-login.html">Admin</a>
+        <button class="toggle-theme" type="button">🌗</button>
       </div>
     </div>
 
@@ -869,12 +900,12 @@
         <h1>POSTAVME TO !</h1>
         <p>Střechy stavíme s citem a dřevem.<br>Bez zbytečného železa.</p>
         <div class="badge-row" data-aos="fade-up" data-aos-delay="120">
-          <a class="badge" href="#sluzby">🔨 Poctivé řemeslo <span class="badge-arrow">→</span></a>
-          <a class="badge" href="#galerie">🏗️ Realizace <span class="badge-arrow">→</span></a>
+          <a class="badge" href="sluzby.html">🔨 Poctivé řemeslo <span class="badge-arrow">→</span></a>
+          <a class="badge" href="galerie.html">🏗️ Realizace <span class="badge-arrow">→</span></a>
           <a class="badge" href="#kontakt">📩 Rychlá poptávka <span class="badge-arrow">→</span></a>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#sluzby">Naše služby</a>
+          <a class="btn btn-primary" href="sluzby.html">Naše služby</a>
           <a class="btn btn-glass" href="#kontakt">Zadat poptávku</a>
         </div>
       </div>
@@ -907,30 +938,72 @@
 
     <section id="kontakt" class="contact">
       <h2 class="section-title" data-aos="fade-up">Kontaktujte nás</h2>
-      <div class="contact-card" data-aos="fade-up">
-        <form>
-          <label class="field">Jméno<input type="text" name="name" required></label>
-          <label class="field">E-mail<input type="email" name="email" required></label>
-          <label class="field">Zpráva<textarea name="message" rows="5" required></textarea></label>
-          <button type="submit" class="btn btn-primary">Odeslat</button>
-        </form>
+      <div class="contact-layout" data-aos="fade-up">
+        <div class="contact-card">
+          <form data-static-form>
+            <div class="form-row">
+              <label class="field">Jméno<input type="text" name="name" placeholder="Vaše jméno" required></label>
+              <label class="field">Telefon<input type="tel" name="phone" placeholder="+420 ..." required></label>
+            </div>
+            <label class="field">E-mail<input type="email" name="email" placeholder="vas@email.cz" required></label>
+            <label class="field">Typ poptávky
+              <select name="topic">
+                <option>Střecha / rekonstrukce</option>
+                <option>Tesařské práce</option>
+                <option>Klempířství</option>
+                <option>Spolupráce pro firmy</option>
+              </select>
+            </label>
+            <label class="field">Zpráva<textarea name="message" rows="5" placeholder="Napište stručně rozsah prací, lokalitu a termín." required></textarea></label>
+            <button type="submit" class="btn btn-primary">Odeslat poptávku</button>
+            <div class="form-status"></div>
+          </form>
+        </div>
+        <aside class="contact-spot" aria-label="Reklamní spot JL Střechy">
+          <img src="images/hero/worker.jpg.png" alt="Tesař při práci na konstrukci">
+          <div class="spot-glow"></div>
+          <div class="spot-content">
+            <span>Rychlá reakce</span>
+            <strong>Střechu řešíme od prvního zaměření po poslední detail.</strong>
+            <p>Pošlete poptávku a ozveme se s dalším postupem. Pro firmy umíme řešit i náhradní kapacity.</p>
+            <a class="btn btn-glass" href="galerie.html">Ukázat realizace</a>
+          </div>
+        </aside>
       </div>
     </section>
 
     <footer class="footer">
       <div class="footer-mask"></div>
       <div class="footer-card">
-        Web design by <strong>David Kozák International s.r.o. + GPT</strong><br>
-        📧 info@david-kozak.com | 🌐 www.david-kozak.com | 📞 +420 775 189 574
-        <div class="social-icons">
-          <img src="ikony_footer/Facebook.jpeg" alt="Facebook">
-          <img src="ikony_footer/Instagram.jpeg" alt="Instagram">
-          <img src="ikony_footer/TikTok.jpeg" alt="TikTok">
-          <img src="ikony_footer/YouTube.jpeg" alt="YouTube">
-          <img src="ikony_footer/Linked In.jpeg" alt="LinkedIn">
-          <img src="ikony_footer/Gmail.jpeg" alt="Gmail">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <img class="dki-logo" src="images/social_footer/footerikona.png" alt="JL Střechy">
+            <div>
+              <strong>JL STŘECHY</strong>
+              <span>Tesařství, klempířství a střešní realizace.</span>
+            </div>
+          </div>
+          <nav class="footer-nav" aria-label="Patička">
+            <a href="o-nas.html">O nás</a>
+            <a href="sluzby.html">Služby</a>
+            <a href="pro-firmy.html">Pro firmy</a>
+            <a href="galerie.html">Galerie</a>
+          </nav>
+          <div class="footer-contact">
+            <a href="mailto:info@jlstrechy.cz">info@jlstrechy.cz</a>
+            <a href="tel:+420775189574">+420 775 189 574</a>
+            <span>Ústecký kraj a okolí</span>
+          </div>
         </div>
-        <img class="dki-logo" src="Black & Grey Elegant Typography Monogram Initials Logo.png" alt="DKI logo">
+        <div class="footer-bottom">
+          <div class="social-icons">
+            <a href="https://www.facebook.com/" aria-label="Facebook"><img src="images/social_footer/facebook-ikon.jpeg" alt=""></a>
+            <a href="https://www.instagram.com/" aria-label="Instagram"><img src="images/social_footer/pintress-ikon.jpeg" alt=""></a>
+            <a href="https://wa.me/420775189574" aria-label="WhatsApp"><img src="images/social_footer/whatsapp-ikon.jpeg" alt=""></a>
+            <a href="tel:+420775189574" aria-label="Telefon"><img src="images/social_footer/call-ikon.jpeg" alt=""></a>
+          </div>
+          <p>© 2026 JL Střechy. Web design by David Kozák International s.r.o. + GPT.</p>
+        </div>
       </div>
     </footer>
   </div>
@@ -1286,5 +1359,6 @@
   loop();
 })();
 </script>
+<script src="site.js"></script>
 </body>
 </html>

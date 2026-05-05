@@ -266,7 +266,7 @@ body.cursor-active .cursor-ring {
 .intro-img {
   position: relative;
   min-height: 90vh;
-  background: url('../images/hero/worker.jpg') no-repeat center top / cover;
+  background: url('../images/hero/worker.jpg.png') no-repeat center top / cover;
 }
 
 .intro-img::after {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro pracovníky - JL Střechy</title>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="ultra-cursor">
+  <div class="container">
+    <div class="topbar"><a class="brand" href="index.html"><div class="brand-mark"><img src="images/logo/logo.jpg" alt="JL Střechy logo"></div><div>JL STŘECHY</div></a><div class="menu"><a href="index.html">Úvod</a><a href="o-nas.html">O nás</a><a href="sluzby.html">Služby</a><a href="pro-firmy.html">Pro firmy</a><div class="menu-group"><a href="pro-pracovniky.html">Pro pracovníky</a><div class="submenu"><a href="#pridat">Jak se přidat</a><a href="#vyhody">Výhody práce</a><a href="#formular">Formulář</a><a href="#kontakt-prace">Kontakt</a></div></div><a href="galerie.html">Galerie</a><a href="index.html#kontakt">Kontakt</a><a href="admin-login.html">Admin</a><button class="toggle-theme" type="button">🌗</button></div></div>
+    <main class="page-shell">
+      <section class="page-hero"><div><h1>Pro pracovníky</h1><p>Stránka pro řemeslníky, pomocníky a nové členy týmu.</p></div><div class="page-note">Obsah lze později rozšířit o konkrétní pozice, mzdy a požadavky.</div></section>
+      <div class="content-stack">
+        <section class="content-card" id="pridat"><h2>Jak se přidat</h2><p>Pošlete základní informace o zkušenostech, dostupnosti a lokalitě. Ozveme se s dalším postupem.</p></section>
+        <section class="content-card" id="vyhody"><h2>Výhody práce</h2><ul class="pill-list"><li>Práce v terénu</li><li>Řemeslný tým</li><li>Různé typy zakázek</li><li>Možnost dlouhodobé spolupráce</li></ul></section>
+        <section class="content-card" id="formular">
+          <h2>Formulář: Chci pracovat</h2>
+          <form class="static-form worker-form" data-static-form>
+            <input type="text" name="name" placeholder="Jméno" required>
+            <input type="tel" name="phone" placeholder="Telefon" required>
+            <input type="email" name="email" placeholder="E-mail">
+            <select name="role">
+              <option>Tesařství</option>
+              <option>Klempířství</option>
+              <option>Pomocné práce</option>
+              <option>Jiné</option>
+            </select>
+            <textarea name="experience" rows="5" placeholder="Zkušenosti a dostupnost"></textarea>
+            <label class="file-field">
+              <span>Životopis <strong>povinně</strong></span>
+              <input type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+              <small>Podporované formáty: PDF, DOC, DOCX.</small>
+            </label>
+            <button class="btn btn-primary" type="submit">Odeslat přihlášku</button>
+            <div class="form-status"></div>
+          </form>
+        </section>
+        <section class="content-card" id="kontakt-prace"><h2>Kontakt</h2><p><a href="mailto:info@jlstrechy.cz">info@jlstrechy.cz</a><br><a href="tel:+420775189574">+420 775 189 574</a></p></section>
+      </div>
+    </main>
+  </div>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script><script src="js/main.js"></script><script src="site.js"></script><script>AOS.init({ duration: 900, once: true, offset: 80 });</script>
+</body>
+</html>

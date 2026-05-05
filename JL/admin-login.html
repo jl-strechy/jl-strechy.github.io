@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Přihlášení do administrace - JL Střechy</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-login">
+    <section class="login-card">
+      <div class="admin-brand">
+        <img src="images/logo/logo.jpg" alt="JL Střechy">
+        <div>
+          <strong>JL STŘECHY</strong>
+          <span>Administrace webu</span>
+        </div>
+      </div>
+
+      <h1>Přihlášení</h1>
+      <p class="login-hint">Demo přístup pro statický prototyp. Produkční přihlášení bude potřebovat backend nebo externí auth službu.</p>
+
+      <form class="admin-form" data-admin-login>
+        <label>
+          E-mail
+          <input type="email" name="email" value="admin@jlstrechy.cz" autocomplete="username" required>
+        </label>
+        <label>
+          Heslo
+          <input type="password" name="password" value="admin123" autocomplete="current-password" required>
+        </label>
+        <button class="admin-btn" type="submit">Vstoupit do administrace</button>
+        <a class="admin-btn secondary" href="index.html">Zpět na web</a>
+        <div class="admin-error" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>
